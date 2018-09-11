@@ -161,9 +161,17 @@ public final class QueryUtils {
                 String date = currentArticle.getString("webPublicationDate");
                 String url = currentArticle.getString("webUrl");
 
-                //Create a new News object with this data and add it to the articles array
-                News article = new News(title,section,date,url);
-                articles.add(article);
+                //Extract the JSONArray associated with the key called "tags"
+                JSONArray tags = currentArticle.getJSONArray("tags");
+                for (int x = 0; x < tags.length(); x++) {
+                    JSONObject webTitle = tags.getJSONObject(x);
+                    //Extract the JSON Object with the key called webTitle
+                    String author = webTitle.getString("webTitle");
+
+                    //Create a new News object with this data and add it to the articles array
+                    News article = new News(title, section, date, author, url);
+                    articles.add(article);
+                }
             }
 
         } catch (JSONException e) {

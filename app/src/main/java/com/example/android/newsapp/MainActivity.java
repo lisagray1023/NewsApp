@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     /**
      * URL for news data from Guardian API
      */
-    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?q=gender%20equality&api-key=39551a7a-db5c-4688-8765-f48f38d90413";
+    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?q=gender%20equality&show-tags=contributor&api-key=39551a7a-db5c-4688-8765-f48f38d90413";
 
     /**
      * Adapter for the list of News objects

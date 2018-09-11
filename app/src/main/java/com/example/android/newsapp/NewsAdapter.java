@@ -66,7 +66,12 @@ public class NewsAdapter extends ArrayAdapter<News> {
         //Set the date string on the TextView
         dateView.setText(formattedDate);
 
-        //Return the News object containing the 3 textviews so it can be shows on the ListView
+        //Get the author string from the News object and store it in a variable
+        String author = currentArticle.getAuthor();
+        TextView authorView = newsArticleView.findViewById(R.id.author);
+        authorView.setText(author);
+
+        //Return the News object containing the 4 textviews so it can be shown on the ListView
         return newsArticleView;
 
     }
