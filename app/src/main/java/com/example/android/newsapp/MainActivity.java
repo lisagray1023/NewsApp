@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,11 +54,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String queryTerm = sharedPrefs.getString(
                 getString(R.string.settings_query_term_key),
                 getString(R.string.settings_query_term_default));
+
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("q", queryTerm);
-        uriBuilder.appendQueryParameter("order-by", "newest");
+        uriBuilder.appendQueryParameter("order-by",orderBy);
         uriBuilder.appendQueryParameter("api-key", "39551a7a-db5c-4688-8765-f48f38d90413");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        Log.e("uriBuilder", uriBuilder.toString());
         return new NewsLoader(this, uriBuilder.toString());
     }
 
