@@ -151,27 +151,26 @@ public final class QueryUtils {
             //Extract the JSONArray associated with the key called "results"
             JSONArray articleArray = response.getJSONArray("results");
 
+
             //For each news article Object in the articleArray, create a News object
             for (int i = 0; i < articleArray.length(); i++) {
                 JSONObject currentArticle = articleArray.getJSONObject(i);
 
                 //Extract the data from the JSONObject
                 String title = currentArticle.getString("webTitle");
+
+                //Get JSON Array tags from within results object
+                JSONArray tagsArray = currentArticle.getJSONArray("tags");
+                JSONObject currentTags = tagsArray.getJSONObject(0);
+                String author = currentTags.getString("webTitle");
+
                 String section = currentArticle.getString("sectionName");
                 String date = currentArticle.getString("webPublicationDate");
                 String url = currentArticle.getString("webUrl");
 
-                //Extract the JSONArray associated with the key called "tags"
-                JSONArray tags = currentArticle.getJSONArray("tags");
-                for (int x = 0; x < tags.length(); x++) {
-                    JSONObject webTitle = tags.getJSONObject(x);
-                    //Extract the JSON Object with the key called webTitle
-                    String author = webTitle.getString("webTitle");
-
-                    //Create a new News object with this data and add it to the articles array
-                    News article = new News(title, section, date, author, url);
-                    articles.add(article);
-                }
+                //Create a new News object with this data and add it to the articles array
+                News article = new News(title, section, date, author, url);
+                articles.add(article);
             }
 
         } catch (JSONException e) {
